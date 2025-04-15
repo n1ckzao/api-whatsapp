@@ -15,7 +15,8 @@ const getListaDeDados = function(usuarios){
         return {
             id: contatosEncontrados.id,
             nome: contatosEncontrados.account,
-            numero: contatosEncontrados.number
+            numero: contatosEncontrados.number,
+            data_de_criacao: contatosEncontrados['created-since']
         }
     }else{
         return {}
@@ -55,7 +56,9 @@ const getListarConversas = function(usuarios) {
     if (contatosEncontrados) {
         return contatosEncontrados.contacts.map(contact => ({
             nome: contact.name,
-            mensagens: contact.messages.map(message => message.content)
+            remetente: contact.messages.map(message => message.sender),
+            mensagens: contact.messages.map(message => message.content),
+            hora: contact.messages.map(message => message.time)
         }))
     } else {
         return []
@@ -63,46 +66,46 @@ const getListarConversas = function(usuarios) {
 }
 
 const getConversasPorContato = function(usuario, nomeContato) {
-    let todosContatos = contatos.contatos["whats-users"];
-    let contatoEncontrado = todosContatos.find(item => item.number == usuario.toUpperCase());
+    let todosContatos = contatos.contatos["whats-users"]
+    let contatoEncontrado = todosContatos.find(item => item.number == usuario.toUpperCase())
 
     if (contatoEncontrado) {
-        let contato = contatoEncontrado.contacts.find(contact => contact.name.toLowerCase() === nomeContato.toLowerCase());
+        let contato = contatoEncontrado.contacts.find(contact => contact.name.toLowerCase() == nomeContato.toLowerCase())
         
         if (contato) {
             return {
                 nome: contato.name,
-                mensagens: contato.messages.filter(message => message.sender === 'me' || message.sender === contato.name)
+                mensagens: contato.messages.filter(message => message.sender === 'me' || message.sender == contato.name)
             };
         } else {
-            return { error: "Contato não encontrado." };
+            return { error: "Contato não encontrado." }
         }
     } else {
-        return { error: "Usuário não encontrado." };
+        return { error: "Usuário não encontrado." }
     }
 }
 
 const getPalavraChave = function(usuario, nomeContato, palavraChave) {
-    let todosContatos = contatos.contatos["whats-users"];
-    let contatoEncontrado = todosContatos.find(item => item.number == usuario.toUpperCase());
+    let todosContatos = contatos.contatos["whats-users"]
+    let contatoEncontrado = todosContatos.find(item => item.number == usuario.toUpperCase())
 
     if (contatoEncontrado) {
-        let contato = contatoEncontrado.contacts.find(contact => contact.name.toLowerCase() === nomeContato.toLowerCase());
+        let contato = contatoEncontrado.contacts.find(contact => contact.name.toLowerCase() == nomeContato.toLowerCase())
         
         if (contato) {
             let mensagensFiltradas = contato.messages.filter(message => 
                 message.content.toLowerCase().includes(palavraChave.toLowerCase())
-            );
+            )
 
             return {
                 nome: contato.name,
                 mensagens: mensagensFiltradas
             }
         } else {
-            return { error: "Contato não encontrado." };
+            return { error: "Contato não encontrado." }
         }
     } else {
-        return { error: "Usuário não encontrado." };
+        return { error: "Usuário não encontrado." }
     }
 }
 //console.log(getListaDeDados('11987876567'))

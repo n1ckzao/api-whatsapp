@@ -8,23 +8,30 @@
     <script src="main.js" defer></script>
 </head>
 <body>
-    <div class="container">
-        <h1>WhatsApp api</h1>
-        <div class="input-group">
-            <input type="text" id="numero" placeholder="Número">
-            <input type="text" id="contato" placeholder="Nome do Contato">
-            <input type="text" id="palavra" placeholder="Palavra-chave">
+    <div class="main-container">
+        <div class="sidebar">
+            <h1>WhatsApp API</h1>
+            <div class="input-group">
+                <input type="text" id="numero" placeholder="Número">
+            </div>
+            <div>
+                <h2>Números disponíveis</h2>
+                <p>11955577796</p>
+                <p>11987876567</p>
+                <p>11966578996</p>
+                <p>1194457796</p>
+            </div>
         </div>
-        
-        <div class="buttons">
-            <button onclick="buscarDadosPessoais()">Dados Pessoais</button>
-            <button onclick="buscarDadosProfile()">Perfil</button>
-            <button onclick="buscarContatos()">Contatos</button>
-            <button onclick="buscarConversas()">Conversas</button>
-            <button onclick="buscarConversasPorNome()">Conversas por Nome</button>
-            <button onclick="buscarPorPalavraChave()">Buscar por Palavra</button>
+
+        <div class="content">
+            <div class="buttons">
+                <button onclick="buscarDadosPessoais()">Dados Pessoais</button>
+                <button onclick="buscarDadosProfile()">Perfil</button>
+                <button onclick="buscarContatos()">Contatos</button>
+                <button onclick="buscarConversas()">Conversas</button>
+            </div>
+            <div id="resultado"></div>
         </div>
-        <div id="resultado"></div>
     </div>
 </body>
 </html>

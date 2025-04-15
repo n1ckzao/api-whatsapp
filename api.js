@@ -51,32 +51,6 @@ app.get('/v1/whatsapp/lista-conversas/:numero', cors(), async function(request, 
     response.status(200)
     response.json(dados)
 })
-app.get('/v1/conversas-contatos/:numero/:contato',cors, async function name(request, response){
-    let zap = request.params.numero.toUpperCase()
-    let dados = estadosCidades.getConversasPorContato(zap)
-    
-    if (dados){
-    response.status(200)
-    response.json(dados)
-    }else{
-    response.status(404)
-    response.json({'status':404, 'message': 'Não foi encontrado um estado'})
-    }
-})
-app.get('/v1/palavra-chave/:numero/:contato/:palavra',cors, async function name(request, response){
-    let zap = request.params.numero.toUpperCase()
-    let dados = estadosCidades.getConversasPorContato(zap)
-    
-    if (dados){
-    response.status(200)
-    response.json(dados)
-    }else{
-    response.status(404)
-    response.json({'status':404, 'message': 'Não foi encontrado um estado'})
-    }
-})
 app.listen('8080', function(){
     console.log('API funcionando e aguardando requisições...')
 })
-
-
